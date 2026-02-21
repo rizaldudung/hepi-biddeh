@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Birthday 🎉</title>
+
+<style>
+
+body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: Arial;
+    text-align: center;
+    padding-top: 50px;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 55px;
+    color: white;
+    text-shadow: 0 0 20px white, 0 0 40px pink;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-15px); }
+}
+
+#text {
+    font-size: 30px;
+    color: white;
+    min-height: 40px;
+    text-shadow:
+    0 0 5px white,
+    0 0 10px pink,
+    0 0 20px pink;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4081;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0 0 20px pink;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.2);
+}
+
+@keyframes goyang {
+    from { transform: rotate(-3deg); }
+    to { transform: rotate(3deg); }
+}
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    animation: jatuh linear infinite;
+}
+
+@keyframes jatuh {
+    from {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+.container-foto {
+    display: flex;
+    justify-content: center; /* posisi tengah */
+    align-items: center;
+    gap: 30px; /* jarak antar foto */
+    margin-top: 20px;
+}
+.container-foto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.foto {
+    width: 250px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.foto:hover {
+    transform: scale(1.1);
+}
+</style>
+
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<h1>🎉 Happy Birthday 🎉</h1>
+
+<p id="text">Klik tombolnya monyet 🐒</p>
+
+<button onclick="mulai()">START PARTY 🎵</button>
+
+<button onclick="ledakan()">SURPRISE 💥</button>
+
+<br>
+
+<div class="container-foto">
+    <img src="stikerwa.jpg" class="foto">
+    <img src="image.png" class="foto">
+    <img src="squidward.jpg" class="foto">
+</div>
+<audio id="musik" src="terima-kasih-pak-jokowi-made-with-Voicemod.mp3"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+let hujan;
+
+function mulai() {
+
+    document.getElementById("musik").play();
+
+    ketikText();
+
+    hujanConfetti();
+}
+
+function ketikText() {
+
+    let element = document.getElementById("text");
+
+    element.innerHTML = "";
+
+    let teks = "SELAMAT ULANG TAHUN MONYET SUGENG 🐒🎂🎉🔥";
+
+    let i = 0;
+
+    function ketik() {
+
+        if(i < teks.length) {
+
+            element.innerHTML += teks.charAt(i);
+
+            i++;
+
+            setTimeout(ketik, 50);
+
+        }
+
+    }
+
+    ketik();
+
+}
+
+function hujanConfetti() {
+
+    clearInterval(hujan);
+
+    hujan = setInterval(() => {
+
+        confetti({
+
+            particleCount: 10,
+
+            spread: 70,
+
+            origin: { y: 0 }
+
+        });
+
+    }, 200);
+
+}
+
+function ledakan() {
+
+    confetti({
+
+        particleCount: 500,
+
+        spread: 180,
+
+        origin: { y: 0.6 }
+
+    });
+
+}
+function buatBintang() {
+
+    const stars = document.getElementById("stars");
+
+    for (let i = 0; i < 100; i++) {
+
+        let star = document.createElement("div");
+
+        star.className = "star";
+
+        star.style.left = Math.random() * 100 + "%";
+
+        star.style.animationDuration =
+            (Math.random() * 3 + 2) + "s";
+
+        star.style.opacity = Math.random();
+
+        stars.appendChild(star);
+
+    }
+
+}
+
+buatBintang();
+</script>
+
+</body>
+</html>
